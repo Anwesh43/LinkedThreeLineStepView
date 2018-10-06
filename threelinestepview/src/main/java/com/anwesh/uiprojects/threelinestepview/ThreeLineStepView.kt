@@ -94,4 +94,44 @@ class ThreeLineStepView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    data class TLSNode(var i : Int, val state : State = State()) {
+        private var next : TLSNode? = null
+        private var prev : TLSNode? = null
+
+        fun addNeighbor() {
+            if (i < nodes - 1) {
+                next = TLSNode(i + 1)
+                next?.prev = this
+            }
+        }
+
+        init {
+            addNeighbor()
+        }
+
+        fun draw(canvas : Canvas, paint : Paint) {
+            canvas.drawTLSNode(i, state.scale, paint)
+            prev?.draw(canvas, paint)
+        }
+
+        fun update(cb : (Int, Float) -> Unit) {
+            state.update {
+                cb(i, it)
+            }
+        }
+
+        fun startUpdating(cb : () -> Unit) {
+            state.startUpdating(cb)
+        }
+
+        fun getNext(dir : Int, cb : () -> Unit) : TLSNode {
+            var curr : TLSNode? = prev
+            if (dir == 1) {
+                curr = next
+            }
+            cb()
+            return this
+        }
+    }
 }
