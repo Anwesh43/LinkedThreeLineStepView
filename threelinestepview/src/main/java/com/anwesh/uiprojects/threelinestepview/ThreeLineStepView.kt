@@ -5,6 +5,7 @@ package com.anwesh.uiprojects.threelinestepview
  */
 
 
+import android.app.Activity
 import android.view.View
 import android.view.MotionEvent
 import android.graphics.Paint
@@ -178,6 +179,15 @@ class ThreeLineStepView(ctx : Context) : View(ctx) {
             tls.startUpdating {
                 animator.start()
             }
+        }
+    }
+
+    companion object {
+
+        fun create(activity : Activity) : ThreeLineStepView {
+            val view : ThreeLineStepView = ThreeLineStepView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
