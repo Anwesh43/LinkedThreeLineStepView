@@ -12,6 +12,7 @@ import android.graphics.Paint
 import android.graphics.Canvas
 import android.graphics.Color
 import android.content.Context
+import android.util.Log
 
 val nodes : Int = 5
 
@@ -62,6 +63,7 @@ class ThreeLineStepView(ctx : Context) : View(ctx) {
                 scale = prevScale + dir
                 dir = 0f
                 prevScale = scale
+                cb(prevScale)
             }
         }
 
@@ -158,6 +160,7 @@ class ThreeLineStepView(ctx : Context) : View(ctx) {
                     dir *= -1
                 }
                 cb(i, scl)
+                Log.d("curr ->","${curr.i}")
             }
         }
 
