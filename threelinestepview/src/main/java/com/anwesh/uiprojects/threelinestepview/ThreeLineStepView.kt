@@ -136,6 +136,9 @@ class ThreeLineStepView(ctx : Context) : View(ctx) {
             if (dir == 1) {
                 curr = next
             }
+            if (curr != null) {
+                return curr
+            }
             cb()
             return this
         }
