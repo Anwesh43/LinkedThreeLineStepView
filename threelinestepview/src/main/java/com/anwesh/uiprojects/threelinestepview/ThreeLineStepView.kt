@@ -16,6 +16,21 @@ val nodes : Int = 5
 
 val k : Float = 3f
 
+fun Canvas.drawTLSNode(i : Int, scale : Float, paint : Paint) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    val gap : Float = w / (nodes + 1)
+    val size : Float = gap/3
+    val osc : Float = 1f / k
+    save()
+    translate(gap + i * gap - size, h/2 - size/2)
+    for (j in 0..(k.toInt() - 1)) {
+        val sc : Float = Math.min(osc, Math.max(0f, scale - j * osc)) * k
+        drawLine(0f, j * size/2, 2 * size * sc, j * size/2, paint)
+    }
+    restore()
+}
+
 class ThreeLineStepView(ctx : Context) : View(ctx) {
 
     private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
