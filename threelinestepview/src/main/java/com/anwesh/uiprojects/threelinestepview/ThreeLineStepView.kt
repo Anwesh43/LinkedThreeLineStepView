@@ -23,6 +23,9 @@ fun Canvas.drawTLSNode(i : Int, scale : Float, paint : Paint) {
     val gap : Float = w / (nodes + 1)
     val size : Float = gap/3
     val osc : Float = 1f / k
+    paint.strokeWidth = Math.min(w, h) / 60
+    paint.strokeCap = Paint.Cap.ROUND
+    paint.color = Color.parseColor("#01579B")
     save()
     translate(gap + i * gap - size, h/2 - size/2)
     for (j in 0..(k.toInt() - 1)) {
